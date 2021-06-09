@@ -648,11 +648,12 @@ int main(int argc, char* argv[])
 #endif
 
 	/* parse IP interface parameter */
-	if (argc == 3) {
-		strncpy(port_a_name,argv[1],IFNAMSIZ);
-		strncpy(port_b_name,argv[2],IFNAMSIZ);
+	if (argc == 4) {
+		strncpy(devname,argv[1],IFNAMSIZ);
+		strncpy(port_a_name,argv[2],IFNAMSIZ);
+		strncpy(port_b_name,argv[3],IFNAMSIZ);
 	} else {
-		PRP_INFOOUT("Usage: %s eth1 eth2 \n",argv[0]);
+		PRP_INFOOUT("Usage: %s prp1 eth1 eth2 \n",argv[0]);
 		exit(-1);
 	}
 
@@ -701,7 +702,6 @@ int main(int argc, char* argv[])
 	PRP_T_set_merge_layer_info(&merge_layer_info);
 
 	/* open tap device */
-	strcpy(devname,"prp1");
 	if ((tap = tap_open(devname)) > 0) {
 		PRP_PRP_LOGOUT(0,"tap open %s: done\n",devname);
 	} else {
